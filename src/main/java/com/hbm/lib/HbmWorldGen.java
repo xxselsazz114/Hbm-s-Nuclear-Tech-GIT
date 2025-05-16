@@ -123,8 +123,8 @@ public class HbmWorldGen implements IWorldGenerator {
 				int d = 16 + rand.nextInt(96);
 
 				for(int y = d - 5; y <= d; y++)
-				if(world.getBlockState(new BlockPos(x, y + 1, z)).getBlock() == Blocks.AIR && world.getBlockState(new BlockPos(x, y, z)).getBlock() == Blocks.NETHERRACK)
-					world.setBlockState(new BlockPos(x, y, z), ModBlocks.ore_nether_smoldering.getDefaultState());
+					if(world.getBlockState(new BlockPos(x, y + 1, z)).getBlock() == Blocks.AIR && world.getBlockState(new BlockPos(x, y, z)).getBlock() == Blocks.NETHERRACK)
+						world.setBlockState(new BlockPos(x, y, z), ModBlocks.ore_nether_smoldering.getDefaultState());
 			}
 		}
 
@@ -162,7 +162,7 @@ public class HbmWorldGen implements IWorldGenerator {
 		DungeonToolbox.generateOre(world, rand, i, j, parseInt(CompatibilityConfig.copperClusterSpawn.get(dimID)), 6, 15, 20, ModBlocks.cluster_copper);
 		
 		//Stone ores
-		DungeonToolbox.generateOre(world, rand, i, j, parseInt(CompatibilityConfig.malachiteSpawn.get(dimID)), 16, 6, 40, ModBlocks.ore_malachite);
+		DungeonToolbox.generateOre(world, rand, i, j, parseInt(CompatibilityConfig.malachiteSpawn.get(dimID)), 7, 6, 40, ModBlocks.ore_malachite);
 		
 		//Special ores
 		DungeonToolbox.generateOre(world, rand, i, j, parseInt(CompatibilityConfig.reiiumSpawn.get(dimID)), 3, 14, 18, ModBlocks.ore_reiium);
@@ -215,7 +215,7 @@ public class HbmWorldGen implements IWorldGenerator {
 	/**
 	 * Fake noise generator "unruh" ("unrest", the motion of a clockwork), using a bunch of layered, scaaled and offset
 	 * sine functions to simulate a simple noise generator that runs somewhat efficiently
-	 * @param long the random function seed used for this operation
+	 * @param //long the random function seed used for this operation
 	 * @param x the exact x-coord of the height you want
 	 * @param z the exact z-coord of the height you want
 	 * @param scale how much the x/z coords should be amplified

@@ -1,5 +1,6 @@
 package com.hbm.world;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import com.hbm.blocks.ModBlocks;
@@ -19,22 +20,30 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemDoor;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.MutableBlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class Radio01 extends WorldGenerator
 {
-	protected Block[] GetValidSpawnBlocks()
-	{
-		return new Block[]
-		{
-			Blocks.GRASS,
-			Blocks.DIRT,
-			Blocks.STONE,
-			Blocks.SAND,
-		};
+	protected Block[] GetValidSpawnBlocks() {
+		ArrayList<Block> validBlocks = new ArrayList<>();
+			validBlocks.add(Blocks.GRASS);
+			validBlocks.add(Blocks.DIRT);
+			validBlocks.add(Blocks.STONE);
+			validBlocks.add(Blocks.SAND);
+		// 添加荒土
+		Block ezwastelandBlock = ForgeRegistries.BLOCKS.getValue(new ResourceLocation("ezwastelands", "ezwastelandblock"));
+		if (ezwastelandBlock != null) {
+			validBlocks.add(ezwastelandBlock);
+		} else {
+			System.out.println("ezwastelandblock 未注册，已跳过");
+		}
+
+		return validBlocks.toArray(new Block[0]);
 	}
 
 	public boolean LocationIsValidSpawn(World world, BlockPos pos)

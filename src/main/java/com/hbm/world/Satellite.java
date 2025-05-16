@@ -1,5 +1,6 @@
 package com.hbm.world;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import com.hbm.blocks.ModBlocks;
@@ -20,10 +21,12 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.MutableBlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class Satellite extends WorldGenerator
 {
@@ -33,17 +36,24 @@ public class Satellite extends WorldGenerator
 	Block Block5 = ModBlocks.deco_titanium;
 	Block Block6 = ModBlocks.tape_recorder;
 	Block Block7 = ModBlocks.deco_tungsten;
-	
-	protected Block[] GetValidSpawnBlocks()
-	{
-		return new Block[]
-		{
-			Blocks.GRASS,
-			Blocks.DIRT,
-			Blocks.STONE,
-			Blocks.SAND,
-			Blocks.SANDSTONE,
-		};
+
+	protected Block[] GetValidSpawnBlocks() {
+		ArrayList<Block> validBlocks = new ArrayList<>();
+		// 添加基础方块
+		validBlocks.add(Blocks.GRASS);
+		validBlocks.add(Blocks.DIRT);
+		validBlocks.add(Blocks.SAND);
+		validBlocks.add(Blocks.SANDSTONE);
+		validBlocks.add(Blocks.STONE);
+		// 添加荒土
+		Block ezwastelandBlock = ForgeRegistries.BLOCKS.getValue(new ResourceLocation("ezwastelands", "ezwastelandblock"));
+		if (ezwastelandBlock != null) {
+			validBlocks.add(ezwastelandBlock);
+		} else {
+			System.out.println("ezwastelandblock 未注册，已跳过");
+		}
+
+		return validBlocks.toArray(new Block[0]);
 	}
 
 	public boolean LocationIsValidSpawn(World world, BlockPos pos)

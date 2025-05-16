@@ -1,5 +1,7 @@
 package com.hbm.world;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import com.hbm.blocks.ModBlocks;
@@ -20,18 +22,26 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.MutableBlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class Barrel extends WorldGenerator {
-	
 	protected Block[] GetValidSpawnBlocks() {
-		
-		return new Block[] {
-				Blocks.GRASS,
-				Blocks.DIRT,
-				Blocks.SAND,
-				Blocks.STONE,
-				Blocks.SANDSTONE
-			};
+		ArrayList<Block> validBlocks = new ArrayList<>();
+		// 添加基础方块
+		validBlocks.add(Blocks.GRASS);
+		validBlocks.add(Blocks.DIRT);
+		validBlocks.add(Blocks.STONE);
+		validBlocks.add(Blocks.SAND);
+		// 添加荒土
+		Block ezwastelandBlock = ForgeRegistries.BLOCKS.getValue(new ResourceLocation("ezwastelands", "ezwastelandblock"));
+		if (ezwastelandBlock != null) {
+			validBlocks.add(ezwastelandBlock);
+		} else {
+			System.out.println("ezwastelandblock 未注册，已跳过");
+		}
+
+		return validBlocks.toArray(new Block[0]);
 	}
 
 	public boolean LocationIsValidSpawn(World world, BlockPos pos) {
