@@ -1,4 +1,4 @@
-# <u>**HBM Nuclear Tech Mod - 1.12.2 Extended Edition**</u>
+# <u>**HBM Nuclear Tech Mod - 1.12.2 vanillaD Edition**</u>
 
 This is my 1.12.2 custom version of the mod
 
